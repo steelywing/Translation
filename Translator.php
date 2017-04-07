@@ -11,15 +11,16 @@ use SteelyWing\Translation\Dictionary\DictionaryInterface;
 
 class Translator
 {
-    protected $dictionaries = [];
-    protected $locale;
-    protected $fallbackLocale;
+    private $dictionaries = [];
+    public $locale;
+    public $fallbackLocale;
+    public $fallbackToKey;
 
     public function __construct($locale = null, $fallbackLocale = null)
     {
 //        $locale = isset($_COOKIE['locale']) ? $_COOKIE['locale'] : $defaultLocale;
-        $this->setLocale($locale);
-        $this->setFallbackLocale($fallbackLocale);
+        $this->locale = $locale;
+        $this->fallbackLocale = $fallbackLocale;
     }
 
     /**
@@ -34,36 +35,48 @@ class Translator
      * Get translated string
      *
      * @param string $key Translation key
+     * @param mixed $args Replacement list, set to locale if this is string
      * @param string $locale
-     *
      * @return string Translated string, null if not found
      */
-    public function translate($key, $locale = null)
+    public function translate($key, $args = [], $locale = null)
     {
         if ($locale === null) {
             $locale = $this->locale;
         }
 
+        if (is_string($args)) {
+            $locale = $args;
+            $args = [];
+        }
+
+        $result = null;
         foreach ($this->dictionaries as $dictionary) {
-            $message = $dictionary->get($key, $locale);
-            if ($message !== null) {
-                return $message;
+            $result = $dictionary->get($key, $locale);
+            if ($result !== null) {
+                break;
             }
         }
 
         // Fallback Locale
-        if ($this->fallbackLocale !== null && $this->fallbackLocale !== $locale) {
-            return $this->translate($key, $this->fallbackLocale);
+        if ($result === null &&
+            $this->fallbackLocale !== null &&
+            $this->fallbackLocale !== $locale
+        ) {
+            $result = $this->translate($key, $args, $this->fallbackLocale);
         }
 
-        return null;
+        if ($result === null) {
+            return $this->fallbackToKey ? $key : null;
+        }
+
+        return str_replace(
+            array_keys($args),
+            array_values($args),
+            $result
+        );
     }
 
-    public function getLocale()
-    {
-        return $this->locale;
-    }
-    
     public function setLocale($locale)
     {
         $this->locale = $locale;
@@ -72,21 +85,5 @@ class Translator
         /*if (!headers_sent()) {
             setcookie('locale', $this->locale, time() + 60*60*24*30, '/');
         }*/
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFallbackLocale()
-    {
-        return $this->fallbackLocale;
-    }
-
-    /**
-     * @param $locale
-     */
-    public function setFallbackLocale($locale = null)
-    {
-        $this->fallbackLocale = $locale;
     }
 }

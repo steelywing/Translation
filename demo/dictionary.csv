@@ -1,4 +1,5 @@
 key,en,zh_tw
+hello,"Hello, :user!",你好，:user！
 hello world,Hello World!,世界，你好！
 i love programming,I love programming!,我喜歡編程！
 english only,English Only,
