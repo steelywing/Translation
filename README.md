@@ -2,8 +2,12 @@
 PHP Translator, Simple, Lightweight
 
 ## Installation
-Clone this repo, run `composer dump-autoload` on root directory, to 
-create `autoload.php`.
+### Composer
+Run `composer require steelywing/translation`
+
+### Manually
+Clone this repo, run `composer dump-autoload` on root directory to 
+generate `autoload.php`.
 
 ## Feature
 - Support CSV, and PHP Array
