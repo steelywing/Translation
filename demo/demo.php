@@ -1,6 +1,6 @@
 <?php
 
-require_once 'vendor/autoload.php';
+require_once '../vendor/autoload.php';
 
 use SteelyWing\Translation\Dictionary\DictionaryArray;
 use SteelyWing\Translation\Dictionary\DictionaryCSV;

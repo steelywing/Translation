@@ -1,6 +1,10 @@
 # Translation
 PHP Translator, Simple, Lightweight
 
+## Installation
+Clone this repo, run `composer dump-autoload` on root directory, to 
+create `autoload.php`.
+
 ## Feature
 - Support CSV, and PHP Array
 - Support fallback language
