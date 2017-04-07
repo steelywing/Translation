@@ -1,0 +1,19 @@
+{
+    "name": "steelywing/translation",
+    "description": "PHP Translation",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Steely Wing",
+            "email": "steely.wing@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": { "SteelyWing\\Translation\\": "" },
+        "exclude-from-classmap": [
+            "/Tests/"
+        ]
+    }
+}
