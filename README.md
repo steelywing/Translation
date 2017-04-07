@@ -18,7 +18,7 @@ use SteelyWing\Translation\Dictionary\DictionaryArray;
 use SteelyWing\Translation\Dictionary\DictionaryCSV;
 use SteelyWing\Translation\Translator;
 
-$translator = new Translator('zh-tw');
+$translator = new Translator();
 
 // Use array as dictionary
 //$dict = new DictionaryArray(include('dictionary.php'));
