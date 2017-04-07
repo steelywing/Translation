@@ -18,7 +18,6 @@ class Translator
 
     public function __construct($locale = null, $fallbackLocale = null)
     {
-//        $locale = isset($_COOKIE['locale']) ? $_COOKIE['locale'] : $defaultLocale;
         $this->locale = $locale;
         $this->fallbackLocale = $fallbackLocale;
     }
@@ -75,15 +74,5 @@ class Translator
             array_values($args),
             $result
         );
-    }
-
-    public function setLocale($locale)
-    {
-        $this->locale = $locale;
-
-        // Save locale to cookie
-        /*if (!headers_sent()) {
-            setcookie('locale', $this->locale, time() + 60*60*24*30, '/');
-        }*/
     }
 }

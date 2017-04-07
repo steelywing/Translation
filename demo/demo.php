@@ -20,34 +20,34 @@ $translator->locale = 'en';
 
 // Hello World!
 echo $translator->translate('hello world');
-echo "\n";
+echo "\n<br>\n";
 
 // Hello, Steely Wing!
 echo $translator->translate('hello', [':user' => 'Steely Wing']);
-echo "\n";
+echo "\n<br>\n";
 
 // 你好，Steely Wing！
 echo $translator->translate('hello', [':user' => 'Steely Wing'], 'zh_tw');
-echo "\n";
+echo "\n<br>\n";
 
 // I love programming!
 echo $translator->translate('i love programming');
-echo "\n";
+echo "\n<br>\n";
 
 // 世界，你好！
 echo $translator->translate('hello world', 'zh_tw');
-echo "\n";
+echo "\n<br>\n";
 
 // Echo empty, no fallback locale set
 echo $translator->translate('english only', 'zh_tw');
-echo "\n";
+echo "\n<br>\n";
 
 // Return the key if key not found
 $translator->fallbackToKey = true;
 echo $translator->translate('english only', 'zh_tw');
-echo "\n";
+echo "\n<br>\n";
 
 // Fallback to "en", echo "English Only"
 $translator->fallbackLocale = 'en';
 echo $translator->translate('english only', 'zh_tw');
-echo "\n";
+echo "\n<br>\n";
