@@ -1,6 +1,10 @@
 # Translation
 PHP Translator, Simple, Lightweight
 
+## Feature
+- Support CSV, and PHP Array
+- Support fallback language
+
 ```php
 use SteelyWing\Translation\Dictionary\DictionaryArray;
 use SteelyWing\Translation\Dictionary\DictionaryCSV;
