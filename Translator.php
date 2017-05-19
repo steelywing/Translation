@@ -65,14 +65,14 @@ class Translator
             $result = $this->translate($key, $args, $this->fallbackLocale);
         }
 
-        if ($result === null) {
-            return $this->fallbackToKey ? $key : null;
+        if ($result !== null) {
+            return str_replace(
+                array_keys($args),
+                array_values($args),
+                $result
+            );
         }
 
-        return str_replace(
-            array_keys($args),
-            array_values($args),
-            $result
-        );
+        return $this->fallbackToKey ? $key : null;
     }
 }

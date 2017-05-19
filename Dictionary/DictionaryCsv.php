@@ -7,7 +7,7 @@
 
 namespace SteelyWing\Translation\Dictionary;
 
-class DictionaryCSV implements DictionaryInterface
+class DictionaryCsv implements DictionaryInterface
 {
     private $delimiter;
     private $enclosure;

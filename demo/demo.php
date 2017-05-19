@@ -3,7 +3,7 @@
 require_once '../vendor/autoload.php';
 
 use SteelyWing\Translation\Dictionary\DictionaryArray;
-use SteelyWing\Translation\Dictionary\DictionaryCSV;
+use SteelyWing\Translation\Dictionary\DictionaryCsv;
 use SteelyWing\Translation\Translator;
 
 $translator = new Translator();
@@ -12,7 +12,7 @@ $translator = new Translator();
 //$dict = new DictionaryArray(include('dictionary.php'));
 
 // Use CSV as dictionary
-$dict = new DictionaryCSV('dictionary.csv');
+$dict = new DictionaryCsv('dictionary.csv');
 
 $translator->addDictionary($dict);
 
