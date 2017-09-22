@@ -1,5 +1,7 @@
-key,en,zh_tw
-hello,"Hello, :user!",你好，:user！
-hello world,Hello World!,世界，你好！
-i love programming,I love programming!,我喜歡編程！
-english only,English Only,
+key,en,zh_tw,zh_cn
+hello,"Hello, :user!",你好，:user！,
+hello world,Hello World!,世界，你好！,
+i love programming,I love programming!,我喜歡編程！,我喜爱编程！
+english only,English Only,,
+simplified chinese testing,Simplified Chinese Testing,繁體轉簡體中文測試,
+traditional chinese testing,Traditional Chinese Testing,簡體轉繁體中文測試,

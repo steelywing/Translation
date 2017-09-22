@@ -9,12 +9,14 @@
             "email": "steely.wing@gmail.com"
         }
     ],
-    "require": {},
     "autoload": {
         "psr-4": { "SteelyWing\\Translation\\": "" },
         "exclude-from-classmap": [
             "/Tests/"
         ]
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "stable",
+    "require": {
+        "steelywing/chinese": "0.2.*"
+    }
 }

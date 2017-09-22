@@ -7,7 +7,7 @@
 
 namespace SteelyWing\Translation\Dictionary;
 
-class DictionaryCsv implements DictionaryInterface
+class DictionaryCSV implements DictionaryInterface
 {
     private $delimiter;
     private $enclosure;
@@ -29,8 +29,12 @@ class DictionaryCsv implements DictionaryInterface
      */
     public function load($resource)
     {
-        $file = new \SplFileObject($resource, 'rb');
-        $file->setFlags(\SplFileObject::READ_CSV | \SplFileObject::SKIP_EMPTY);
+        $file = new \SplFileObject($resource);
+        $file->setFlags(
+            \SplFileObject::READ_CSV |
+            \SplFileObject::SKIP_EMPTY |
+            \SplFileObject::READ_AHEAD
+        );
         $file->setCsvControl($this->delimiter, $this->enclosure, $this->escape);
 
         $locales = $file->current();

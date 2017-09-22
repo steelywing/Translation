@@ -31,6 +31,20 @@ class Translator
     }
 
     /**
+     * @param string $string
+     * @param array $args
+     * @return string
+     */
+    private static function replace($string, array $args)
+    {
+        return str_replace(
+            array_keys($args),
+            array_values($args),
+            $string
+        );
+    }
+
+    /**
      * Get translated string
      *
      * @param string $key Translation key
@@ -38,41 +52,34 @@ class Translator
      * @param string $locale
      * @return string Translated string, null if not found
      */
-    public function translate($key, $args = [], $locale = null)
+    public function translate($key, array $args = [], $locale = null)
     {
         if ($locale === null) {
             $locale = $this->locale;
         }
 
-        if (is_string($args)) {
-            $locale = $args;
-            $args = [];
-        }
-
-        $result = null;
         foreach ($this->dictionaries as $dictionary) {
             $result = $dictionary->get($key, $locale);
             if ($result !== null) {
-                break;
+                return self::replace($result, $args);
             }
         }
 
-        // Fallback Locale
-        if ($result === null &&
-            $this->fallbackLocale !== null &&
+        // Fallback
+
+        if ($this->fallbackLocale !== null &&
             $this->fallbackLocale !== $locale
         ) {
             $result = $this->translate($key, $args, $this->fallbackLocale);
+            if ($result !== null) {
+                return $result;
+            }
         }
 
-        if ($result !== null) {
-            return str_replace(
-                array_keys($args),
-                array_values($args),
-                $result
-            );
+        if ($this->fallbackToKey) {
+            return $key;
         }
 
-        return $this->fallbackToKey ? $key : null;
+        return null;
     }
 }

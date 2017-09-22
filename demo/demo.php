@@ -3,7 +3,8 @@
 require_once '../vendor/autoload.php';
 
 use SteelyWing\Translation\Dictionary\DictionaryArray;
-use SteelyWing\Translation\Dictionary\DictionaryCsv;
+use SteelyWing\Translation\Dictionary\DictionaryChinese;
+use SteelyWing\Translation\Dictionary\DictionaryCSV;
 use SteelyWing\Translation\Translator;
 
 $translator = new Translator();
@@ -12,7 +13,7 @@ $translator = new Translator();
 //$dict = new DictionaryArray(include('dictionary.php'));
 
 // Use CSV as dictionary
-$dict = new DictionaryCsv('dictionary.csv');
+$dict = new DictionaryCSV('dictionary.csv');
 
 $translator->addDictionary($dict);
 
@@ -34,20 +35,36 @@ echo "\n<br>\n";
 echo $translator->translate('i love programming');
 echo "\n<br>\n";
 
+// 我喜爱编程！
+echo $translator->translate('i love programming', [], 'zh_cn');
+echo "\n<br>\n";
+
 // 世界，你好！
-echo $translator->translate('hello world', 'zh_tw');
+echo $translator->translate('hello world', [], 'zh_tw');
 echo "\n<br>\n";
 
 // Echo empty, no fallback locale set
-echo $translator->translate('english only', 'zh_tw');
+echo $translator->translate('english only', [], 'zh_tw');
 echo "\n<br>\n";
 
 // Return the key if key not found
 $translator->fallbackToKey = true;
-echo $translator->translate('english only', 'zh_tw');
+echo $translator->translate('english only', [], 'zh_tw');
 echo "\n<br>\n";
 
 // Fallback to "en", echo "English Only"
 $translator->fallbackLocale = 'en';
-echo $translator->translate('english only', 'zh_tw');
+echo $translator->translate('english only', [], 'zh_tw');
+echo "\n<br>\n";
+
+// Chinese conversion
+$chinese = new DictionaryChinese($dict);
+$translator->addDictionary($chinese);
+
+// Auto translate "繁體轉簡體中文測試" to "繁体转简体中文測試"
+echo $translator->translate('simplified chinese testing', [], 'zh_cn');
+echo "\n<br>\n";
+
+// Auto translate "简体转繁体中文测试" to "簡體轉繁體中文測試"
+echo $translator->translate('traditional chinese testing', [], 'zh_tw');
 echo "\n<br>\n";

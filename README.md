@@ -15,7 +15,7 @@ generate `autoload.php`.
 
 ```php
 use SteelyWing\Translation\Dictionary\DictionaryArray;
-use SteelyWing\Translation\Dictionary\DictionaryCsv;
+use SteelyWing\Translation\Dictionary\DictionaryCSV;
 use SteelyWing\Translation\Translator;
 
 $translator = new Translator();
@@ -32,17 +32,55 @@ $translator->setLocale('en');
 
 // Hello World!
 echo $translator->translate('hello world');
+echo "\n<br>\n";
+
+// Hello, Steely Wing!
+echo $translator->translate('hello', [':user' => 'Steely Wing']);
+echo "\n<br>\n";
+
+// 你好，Steely Wing！
+echo $translator->translate('hello', [':user' => 'Steely Wing'], 'zh_tw');
+echo "\n<br>\n";
 
 // I love programming!
 echo $translator->translate('i love programming');
+echo "\n<br>\n";
+
+// 我喜爱编程！
+echo $translator->translate('i love programming', [], 'zh_cn');
+echo "\n<br>\n";
 
 // 世界，你好！
-echo $translator->translate('hello world', 'zh_tw');
+echo $translator->translate('hello world', [], 'zh_tw');
+echo "\n<br>\n";
 
 // Echo empty, no fallback locale set
-echo $translator->translate('english only', 'zh_tw');
+echo $translator->translate('english only', [], 'zh_tw');
+echo "\n<br>\n";
 
-$translator->setFallbackLocale('en');
+// Return the key if key not found
+$translator->fallbackToKey = true;
+echo $translator->translate('english only', [], 'zh_tw');
+echo "\n<br>\n";
+
 // Fallback to "en", echo "English Only"
-echo $translator->translate('english only', 'zh_tw');
+$translator->fallbackLocale = 'en';
+echo $translator->translate('english only', [], 'zh_tw');
+echo "\n<br>\n";
+```
+
+## Chinese conversion 繁簡轉換
+```php
+use SteelyWing\Translation\Dictionary\DictionaryChinese;
+
+$chinese = new DictionaryChinese($dict);
+$translator->addDictionary($chinese);
+
+// Auto translate "繁體轉簡體中文測試" to "繁体转简体中文測試"
+echo $translator->translate('simplified chinese testing', [], 'zh_cn');
+echo "\n<br>\n";
+
+// Auto translate "简体转繁体中文测试" to "簡體轉繁體中文測試"
+echo $translator->translate('traditional chinese testing', [], 'zh_tw');
+echo "\n<br>\n";
 ```
