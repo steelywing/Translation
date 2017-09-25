@@ -12,14 +12,14 @@ use SteelyWing\Translation\Dictionary\DictionaryInterface;
 class Translator
 {
     private $dictionaries = [];
-    public $locale;
-    public $fallbackLocale;
-    public $fallbackToKey;
+    private $locale;
+    private $fallback;
+    private $fallbackToKey = false;
 
-    public function __construct($locale = null, $fallbackLocale = null)
+    public function __construct($locale = null, $fallback = null)
     {
         $this->locale = $locale;
-        $this->fallbackLocale = $fallbackLocale;
+        $this->fallback = $fallback;
     }
 
     /**
@@ -67,10 +67,10 @@ class Translator
 
         // Fallback
 
-        if ($this->fallbackLocale !== null &&
-            $this->fallbackLocale !== $locale
+        if ($this->fallback !== null &&
+            $this->fallback !== $locale
         ) {
-            $result = $this->translate($key, $args, $this->fallbackLocale);
+            $result = $this->translate($key, $args, $this->fallback);
             if ($result !== null) {
                 return $result;
             }
@@ -81,5 +81,53 @@ class Translator
         }
 
         return null;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLocale()
+    {
+        return $this->locale;
+    }
+
+    /**
+     * @param null $locale
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
+    }
+
+    /**
+     * @return null
+     */
+    public function getFallback()
+    {
+        return $this->fallback;
+    }
+
+    /**
+     * @param null $fallback
+     */
+    public function setFallback($fallback)
+    {
+        $this->fallback = $fallback;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getFallbackToKey()
+    {
+        return $this->fallbackToKey;
+    }
+
+    /**
+     * @param bool $fallbackToKey
+     */
+    public function setFallbackToKey($fallbackToKey)
+    {
+        $this->fallbackToKey = $fallbackToKey;
     }
 }

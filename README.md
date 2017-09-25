@@ -59,12 +59,12 @@ echo $translator->translate('english only', [], 'zh_tw');
 echo "\n<br>\n";
 
 // Return the key if key not found
-$translator->fallbackToKey = true;
+$translator->setFallbackToKey(true);
 echo $translator->translate('english only', [], 'zh_tw');
 echo "\n<br>\n";
 
 // Fallback to "en", echo "English Only"
-$translator->fallbackLocale = 'en';
+$translator->setFallback('en');
 echo $translator->translate('english only', [], 'zh_tw');
 echo "\n<br>\n";
 ```
