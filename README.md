@@ -24,7 +24,7 @@ $translator = new Translator();
 //$dict = new DictionaryArray(include('dictionary.php'));
 
 // Use CSV as dictionary
-$dict = new DictionaryCsv('dictionary.csv');
+$dict = new DictionaryCSV('dictionary.csv');
 
 $translator->addDictionary($dict);
 
